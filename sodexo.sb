@@ -1,0 +1,37 @@
+CRLF = Text.GetCharacter(13) + Text.GetCharacter(10)
+GraphicsWindow.BackgroundColor = "LightGray"
+GraphicsWindow.BrushColor = "Black"
+GraphicsWindow.FontName = "Verdana" 
+  GraphicsWindow.FontSize = 25
+gw = GraphicsWindow.Width
+gh = GraphicsWindow.Height
+'tb = Controls.AddMultiLineTextBox(0, 0)
+tb=Controls.AddTextBox(0,50)
+Controls.SetSize(tb, gw, 50)
+Controls.AddButton("Enter", 5, 110)
+Controls.ButtonClicked = OnButtonClicked
+
+GraphicsWindow.DrawText(1,1,"Podaj kod bonu sodexo")
+Sub OnButtonClicked
+  buf = Controls.GetTextBoxText(tb)
+  ConvertTextToLines()
+  ShowLines()
+EndSub
+Sub ConvertTextToLines
+  len = Text.GetLength(buf)
+  hash=Text.GetSubText(buf,1,1)
+  If  hash="#" Then 
+    len=len-1
+    buf = Text.GetSubText(buf,2,30)
+  endif
+  warzl = Text.GetSubText(buf,5,4)
+  wargr= Text.GetSubText(buf,9,2)
+  dat = Text.GetSubText(buf,11,7)
+   GraphicsWindow.DrawText (10,150,"Długość kodu: "+len)
+   GraphicsWindow.DrawText (10,200,buf)
+   GraphicsWindow.DrawText (10,250,"Kwota:"+warzl+" zł "+wargr+" gr")
+   GraphicsWindow.DrawText (10,300,"Data ważności: 2"+dat)
+EndSub
+Sub ShowLines
+  
+EndSub
